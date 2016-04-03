@@ -1,0 +1,35 @@
+[data-component*=riot-view]{
+	display:none;
+}
+
+.screen{
+	border:1px dotted cyan;
+	width:45%;
+	height:80%;
+	position:absolute;
+	left:28%;
+	top:10%;
+	border-left:0;
+	border-right:0;
+	background-color:rgba(0, 0, 0, .8);
+	z-index:4;
+	display:none
+}
+
+.screen.-open{
+	display:block;
+}
+
+.screen .title{
+	padding:15px 0 30px;
+}
+
+.screen .title:before{
+	content:'--.';
+	font-size:12px;
+	padding:5px;
+}
+
+.screen [data-component*=riot-view]{
+	display:block;
+}

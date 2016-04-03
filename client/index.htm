@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR" speaker="Brazilian Portuguese Female">
+	<head>
+		<title>J.A.R.V.I.S</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/interface.css" />
+		<link rel="stylesheet" type="text/css" href="css/modules/assistent.css" />
+		<link rel="stylesheet" type="text/css" href="css/modules/screen.css" />
+		<link rel="stylesheet" type="text/css" href="css/modules/spotify.css" />
+		<link href="//fonts.googleapis.com/css?family=Orbitron:400,500,700" rel="stylesheet" type="text/css">
+		<script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script type="text/javascript" data-application="dist/js/app.min.js" src="dist/js/main.min.js" id="main-script" async></script>
+	</head>
+
+	<body data-app="app">
+
+		<section data-controller="assistent"></section>
+		<section data-controller="volume"></section>
+		<section data-controller="translate"></section>
+		<section class="screen" data-controller="screen"></section>
+
+		<section class="spotify" data-controller="spotify">
+			<div data-component="riot-view">
+				<div if="{artist}">
+					<p class="artist">{artist}</p>
+					<p class="track">{track}</p>
+					<img class="image" riot-src="{image}" />
+				</div>
+				<div if="{!artist}">
+					<em>Sem músicas</em>
+					<p class="instructions">Para tocar uma música, fale :<br />
+						spotify toque <strong>--Nome da sua música--</strong>
+					</p>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
