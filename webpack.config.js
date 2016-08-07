@@ -15,8 +15,8 @@ module.exports = {
 	devtool:'source-map',
 
 	entry:{
-		main:[ 'jails', 'riot', 'scriptjs', './client/es6/main'+ (dev?'.dev':'') ],
-		app :['./client/es6/apps/app']
+		main:[ 'jails', 'riot', 'scriptjs', './client/js/main'+ (dev?'.dev':'') ],
+		jarvis :['./client/js/apps/jarvis']
 	},
 
 	output: {
@@ -30,7 +30,8 @@ module.exports = {
 			mods  :'jails-modules',
 			comps :'jails-components',
 			riot  :'riot/riot'
-		}
+		},
+		modulesDirectories :['js/', 'node_modules']
 	},
 
 	plugins :[ new optimize.CommonsChunkPlugin('main', 'main.min.js') ].concat(

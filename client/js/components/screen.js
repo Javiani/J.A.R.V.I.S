@@ -1,36 +1,37 @@
 import jails from 'jails'
 import scriptjs from 'scriptjs/dist/script.min'
 
-jails.controller('screen', function( html, data ){
+jails('screen', ( component, html, anno ) =>{
 
 	let body = document.body
-	let controller
+	let cp
 
-	this.init = ()=>{
-		this.subscribe('assistent:ready', commands)
+	component.init = ()=>{
+		component.subscribe('assistent:ready', commands)
 	}
 
 	let open = ( name )=>{
+
 		name = name.toLowerCase()
-		controller = document.querySelector('[data-controller*='+name+']')
+		cp = document.querySelector('[name*='+name+']')
 
 		html.innerHTML = '<h1 class="title">' + name + '</h1>'
-		html.appendChild( controller )
+		html.appendChild( cp )
 		html.classList.add('-open')
 	}
 
 	let close = ()=>{
-		body.appendChild( controller )
+		body.appendChild( cp )
 		html.classList.remove('-open')
-		controller = null
+		cp = null
 	}
 
 	let commands = ()=>{
 
-		this.publish('assistent:command', {
+		component.publish('assistent:command', {
 
 			'abrir :name': (name)=>{
-				if( controller ) close()
+				if( cp ) close()
 				else open( name )
 			},
 

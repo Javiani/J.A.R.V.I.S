@@ -1,23 +1,23 @@
-import 'comps/riot-view/riot-view'
+import 'comps/view/view'
 import jails from 'jails'
 import scriptjs from 'scriptjs/dist/script.min'
 
-jails.controller('spotify', function( html, data ){
+jails('spotify', ( component, html, data ) =>{
 
 	let socket = io()
 	let audio  = new Audio()
-	let view   = this.x('[data-component=riot-view]')
+	let view   = component.get('[data-component=view]')
 
-	this.init = ()=>{
+	component.init = ()=>{
 		view('update')
 		socket.on('spotify:search:track', play)
-		this.subscribe('assistent:ready', commands)
+		component.subscribe('assistent:ready', commands)
 	}
 
 	let play = ( response )=>{
 
 		if( !response.tracks.items ){
-			return this.publish('assistent:speak', 'Música não encontrada')
+			return component.publish('assistent:speak', 'Música não encontrada')
 		}
 
 		let item = response.tracks.items[0]
@@ -33,10 +33,10 @@ jails.controller('spotify', function( html, data ){
 
 	let commands = ()=>{
 
-		this.publish('assistent:command', {
+		component.publish('assistent:command', {
 
 			'spotify toque *name': (name)=>{
-				this.publish('speak', 'Procurando por ' + name)
+				component.publish('speak', 'Procurando por ' + name)
 				socket.emit('spotify:search:track', name)
 			},
 

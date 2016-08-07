@@ -1,23 +1,22 @@
 import jails from 'jails'
 import scriptjs from 'scriptjs'
 
-jails.controller('assistent', function( html, data ){
+jails('assistent', ( component, html, data ) =>{
 
 	let socket = io()
 	let root = document.documentElement
 	let speaker = root.getAttribute('speaker')
 	let language = root.getAttribute('lang')
 
-	this.init = ()=>{
+	component.init = ()=>{
 
 		load()
 
-		this.subscribe('speak', speak)
-		this.subscribe('assistent:command', add)
+		component.subscribe('speak', speak)
+		component.subscribe('assistent:command', add)
 	}
 
 	let start = ()=>{
-
 		add({ 'Olá': ()=> speak('Olá') })
 
 		annyang.debug(true)
@@ -25,7 +24,7 @@ jails.controller('assistent', function( html, data ){
 		annyang.start()
 
 		assistent()
-		this.publish('assistent:ready')
+		component.publish('assistent:ready')
 	}
 
 	let add = ( command )=>{
